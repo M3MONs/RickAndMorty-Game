@@ -77,6 +77,23 @@ body {
   margin-top: 7%;
 }
 
+.fa-heart{
+  color: red;
+}
+.stat-icon{
+  width: 32px;
+  height: 32px;
+  margin-bottom: 5px;
+}
+
+.stats h2{
+  width: 150px;
+  background-color: #333;
+  margin: auto;
+  border-radius: 15px;
+  margin-top: 10px;
+}
+
 @media (max-width: 990px) {
   .flip-card-container {
     margin: auto;

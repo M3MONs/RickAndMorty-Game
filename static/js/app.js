@@ -1,11 +1,13 @@
 import API from "./api.js";
 import Character from "./character.js";
+import * as say from './combatsystem.js';
 const api = new API();
 
 let currentCaracter = 1;
 const $loadNext = document.querySelector("#load-next");
 const $loadPrevious = document.querySelector("#load-previous");
 const $loadGame = document.querySelector("#load-game");
+
 
 //Next Character
 $loadNext.addEventListener("click", async () => {
@@ -15,6 +17,7 @@ $loadNext.addEventListener("click", async () => {
     }
     var characterData = await api.getCharacter(++currentCaracter);
     new Character(characterData);
+    Stats(currentCaracter);
   }
 });
 
@@ -27,6 +30,7 @@ $loadPrevious.addEventListener("click", async () => {
     }
     var characterData = await api.getCharacter(--currentCaracter);
     new Character(characterData);
+    Stats(currentCaracter);
   }
 });
 
@@ -40,7 +44,7 @@ $loadGame.addEventListener("click", async () => {
   );
   enemyCharacterCard.classList.remove("d-none");
 
-  //delete elements
+  //exclusion of unnecessary elements
   var playButton = document.querySelector("#load-game");
   playButton.classList.add("d-none");
   var scrollButtons = document.querySelector("#load-previous");
@@ -55,14 +59,7 @@ async function initApp(initCharacterId) {
   const characterData = await api.getCharacter(initCharacterId);
   console.log(characterData);
   new Character(characterData);
+  Stats(currentCaracter);
 }
 
 initApp(currentCaracter);
-
-
-
-//stats
-
-// health:100
-//atack :10
-//defence :5

@@ -38,7 +38,7 @@ export default class Character {
 
   buildBackCard() {
     return `
-        <div class="mt-5">
+        <div class="mt-2">
           <h2>Status: ${this.translator(this.status)}</h2>
           <h2>Płeć: ${this.gender}</h2>
           <h2>Gatunek: ${this.species}</h2>
