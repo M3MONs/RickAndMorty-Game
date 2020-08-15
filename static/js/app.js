@@ -5,12 +5,14 @@ const api = new API();
 
 let currentCaracter = 1;
 let enemyCharacterId;
-const $loadNext = document.querySelector("#load-next");
-const $loadPrevious = document.querySelector("#load-previous");
-const $loadGame = document.querySelector("#load-game");
+const loadNext = document.querySelector("#load-next");
+const loadPrevious = document.querySelector("#load-previous");
+const loadGame = document.querySelector("#load-game");
+const nextEnemyCharacter = document.querySelector("#next-opponent");
+
 
 //Next Character
-$loadNext.addEventListener("click", async () => {
+loadNext.addEventListener("click", async () => {
 	if (currentCaracter <= 5) {
 		if (currentCaracter === 5) {
 			currentCaracter = 0;
@@ -22,7 +24,7 @@ $loadNext.addEventListener("click", async () => {
 });
 
 //Prevoius Character
-$loadPrevious.addEventListener("click", async () => {
+loadPrevious.addEventListener("click", async () => {
 	if (currentCaracter > 0) {
 		//loop for card set next card id=1 if we click next on card id=5
 		if (currentCaracter === 1) {
@@ -34,13 +36,8 @@ $loadPrevious.addEventListener("click", async () => {
 	}
 });
 
-function createEnemy() {
-	enemyCharacterId = Math.floor(Math.random() * 100) + 50;
-	initApp(enemyCharacterId);
-	Stats(enemyCharacterId);
-}
 //Load Enemy card and game
-$loadGame.addEventListener("click", async () => {
+loadGame.addEventListener("click", async () => {
 	//create enemy card
 	createEnemy();
 	var editCard = document.querySelectorAll(".flip-card-container");
@@ -59,12 +56,23 @@ $loadGame.addEventListener("click", async () => {
   });
 });
 
+nextEnemyCharacter.addEventListener("click", async () =>{
+	Stats(currentCaracter);
+	createEnemy()
+	nextEnemyCharacter.classList.add("d-none");
+})
+
 //create first main Character card
 async function initApp(initCharacterId) {
-	const characterData = await api.getCharacter(initCharacterId);
-	console.log(characterData);
+	var characterData = await api.getCharacter(initCharacterId);
 	new Character(characterData);
 	Stats(currentCaracter);
+}
+
+function createEnemy() {
+	enemyCharacterId = Math.floor(Math.random() * 100) + 50;
+	initApp(enemyCharacterId);
+	Stats(enemyCharacterId);
 }
 
 initApp(currentCaracter);

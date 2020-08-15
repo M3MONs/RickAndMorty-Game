@@ -79,7 +79,7 @@ body {
   margin-top: 1.25rem;
 }
 #game {
-  margin-top: 150px;
+  margin-top: 100px;
 }
 
 #front-stats{
@@ -106,5 +106,9 @@ body {
 @media (max-width: 990px) {
   .flip-card-container {
     margin: auto;
+  }
+
+  #next-opponent{
+    margin-top: 25px;
   }
 }

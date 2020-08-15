@@ -44,6 +44,7 @@
               <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
             </div>
           </div>
+          <div id="lose"></div>
         </div>
 
         <!-- Back Card -->
@@ -82,7 +83,7 @@
         <div class="flip-card-front d-block text-centeFr align-items-center">
           <!-- Image and Name -->
             <div id="enemy-character-front-card"></div>
-            <div id="enemy-stats" class="h2 mt-3 d-flex e-stat">
+            <div id="enemy-stats" class="h2 mt-3 d-flex d-none e-stat">
               <div class="mt-1 stats">
                 <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span id="echar-h"></span>
               </div>
@@ -93,6 +94,7 @@
                 <img src="static/imgs/shield.svg" class="stat-icon"><span id="echar-d"></span>
               </div>
             </div>
+            <div id="win"></div>
           
         </div>
         <!-- Back Card -->
@@ -104,7 +106,9 @@
       </div>
     </div>
   </div>
-  </div>
+
+  
+  <div id="next-opponent" class="text-center d-none"><button class="btn btn-warning btn-lg">New Enemy</button></div>
 
 
   <div class="text-center mt-5">

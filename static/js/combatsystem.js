@@ -10,6 +10,7 @@ function Stats(id) {
 	let enemyDefense;
 
 	let healthRegen;
+	let maxRegen = 4;
 
 	const renderHealth = document.querySelectorAll(".char-h");
 	const renderAtack = document.querySelectorAll(".char-a");
@@ -18,6 +19,11 @@ function Stats(id) {
 	const renderEnemyHealth = document.querySelector("#echar-h");
 	const renderEnemyAtack = document.querySelector("#echar-a");
 	const renderEnemyDefense = document.querySelector("#echar-d");
+
+	const enemyStats = document.querySelector("#enemy-stats");
+	const charStats = document.querySelector("#front-stats");
+	const win = document.querySelector("#win");
+	const lose = document.querySelector("#lose");
 
 	class Character {
 		constructor(health, atack, defense) {
@@ -35,12 +41,11 @@ function Stats(id) {
 		}
 	}
 	// Stats Characters (health, atack, defense)
-	const RickSanchez = new Character(100, 25, 15);
+	let RickSanchez = new Character(100, 25, 15);
 	const MortySmith = new Character(75, 17, 20);
 	const SummerSmith = new Character(90, 20, 15);
 	const BethSmith = new Character(80, 23, 18);
 	const JerrySmith = new Character(50, 12, 12);
-
 	//generate character and enemy character stats
 	switch (id) {
 		case 1:
@@ -94,6 +99,7 @@ function Stats(id) {
 		enemyDefense = getRandomEnemyStat(defense);
 		renderStats();
 		renderHealths(2);
+		readEnemyCharacterStats();
 	}
 
 	//Atack
@@ -103,8 +109,9 @@ function Stats(id) {
 
 	function characterAtack() {
 		readCharacterStats();
+		readEnemyCharacterStats();
 		if (health > 0) {
-			enemyHealth = atackAlgorithm(enemyHealth, atack, enemyDefense) - 5;
+			enemyHealth = atackAlgorithm(enemyHealth, atack, enemyDefense);
 			renderHealths(2);
 			enemyCombatFunction();
 		}
@@ -118,45 +125,63 @@ function Stats(id) {
 
 	function characterRegen() {
 		readCharacterStats();
-		if (health < healthRegen && health>0 && enemyHealth>0) {
-			health += randomNumberFight() + 10;
+		readEnemyCharacterStats();
+		if (health < healthRegen && health > 0 && enemyHealth > 0 && maxRegen > 0) {
+			maxRegen -= 1;
+			console.log(maxRegen);
+			health += randomNumberFight() + 20;
 			renderHealths(0);
-		var counterMove = randomNumberFight();
-		if (counterMove < -2) {
-			enemyCombatFunction();
 		}
-	}
 	}
 
 	function enemyCombatFunction() {
 		readCharacterStats();
+		readEnemyCharacterStats();
 		var enemyAction = randomNumberFight();
 
 		if (enemyHealth > 0) {
-			if (enemyAction >= -3) {
-				health = atackAlgorithm(health, atack, defense) - 7;
+			if (enemyAction >= -2) {
+				health = atackAlgorithm(health, atack, defense) - 8;
 				//must chceck char hp
 				renderHealths(1);
 			} else {
-				enemyHealth += randomNumberFight() - 5;
+				enemyHealth += randomNumberFight() + 10;
 				renderHealths(2);
 			}
+			checkResult();
 		}
-		checkResult();
 	}
+
+	function nextOpponentButton() {
+		var button = document.querySelector("#next-opponent");
+		button.classList.remove("d-none");
+	}
+
 
 	function checkResult() {
 		readCharacterStats();
+		readEnemyCharacterStats();
 
-		const win = document.querySelector("#enemy-stats");
-		const lose = document.querySelector("#front-stats");
 		if (enemyHealth <= 0 && health <= 0) {
+			enemyStats.classList.remove("d-flex");
+			charStats.classList.remove("d-flex");
+			charStats.classList.add("d-none");
 			win.innerHTML = `<h1 class="m-auto">Draft~!</h1>`;
 			lose.innerHTML = `<h1 class="m-auto">Draft~!</h1>`;
+			maxRegen = 4;
+			nextOpponentButton();
 		} else if (enemyHealth <= 0) {
+			enemyStats.classList.remove("d-flex");
+			win.classList.remove("d-none");
 			win.innerHTML = `<h1 class="m-auto">You Win~!</h1>`;
-		} else if (health <= 0) {
-			lose.innerHTML = `<h1 class="m-auto">You Lose~!</h1>`;
+			maxRegen = 4;
+			nextOpponentButton();
+		}
+		if (health <= 0) {
+			charStats.classList.remove("d-flex");
+			charStats.classList.add("d-none");
+			lose.classList.remove("d-none");
+			lose.innerHTML = `<h2 class="m-auto">You Lose!</h2>`;
 		}
 	}
 
@@ -164,13 +189,16 @@ function Stats(id) {
 		health = Number(renderHealth[1].innerHTML.valueOf());
 		atack = Number(renderAtack[1].innerHTML.valueOf());
 		defense = Number(renderDefense[1].innerHTML.valueOf());
+	}
+
+	function readEnemyCharacterStats() {
 		enemyHealth = Number(renderEnemyHealth.innerHTML.valueOf());
 		enemyAtack = Number(renderEnemyAtack.innerHTML.valueOf());
 		enemyDefense = Number(renderEnemyDefense.innerHTML.valueOf());
 	}
 
 	function atackAlgorithm(h, a, d) {
-		h -= Math.abs(Math.round((a - d) * 1.1) + randomNumberFight());
+		h -= Math.abs(Math.round((2 * a - d) * 0.55) + randomNumberFight());
 		return h;
 	}
 
@@ -183,4 +211,10 @@ function Stats(id) {
 		var max = Math.floor(x + 8);
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
+
+	document.querySelector("#next-opponent").onclick = function () {
+		enemyStats.classList.add("d-flex");
+		win.classList.add("d-none");
+		lose.classList.add("d-none");
+	};
 }
