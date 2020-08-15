@@ -9,7 +9,7 @@ function Stats(id) {
 	let enemyAtack;
 	let enemyDefense;
 
-	//Select docuument to render stats
+	let healthRegen;
 
 	const renderHealth = document.querySelectorAll(".char-h");
 	const renderAtack = document.querySelectorAll(".char-a");
@@ -29,6 +29,7 @@ function Stats(id) {
 			health = this.health;
 			atack = this.atack;
 			defense = this.defense;
+			healthRegen = health - 20;
 			renderStats();
 			renderHealths(1);
 		}
@@ -86,12 +87,6 @@ function Stats(id) {
 		}
 	}
 
-	function getRandomEnemyStat(x) {
-		var min = Math.ceil(x - 9);
-		var max = Math.floor(x + 8);
-		return Math.floor(Math.random() * (max - min + 1)) + min;
-	}
-
 	function setEnemyStats() {
 		readCharacterStats();
 		enemyHealth = getRandomEnemyStat(health);
@@ -110,7 +105,7 @@ function Stats(id) {
 		readCharacterStats();
 		if (health > 0) {
 			enemyHealth = atackAlgorithm(enemyHealth, atack, enemyDefense) - 5;
-			renderHealths(enemyHealth, 6);
+			renderHealths(2);
 			enemyCombatFunction();
 		}
 		checkResult();
@@ -123,15 +118,14 @@ function Stats(id) {
 
 	function characterRegen() {
 		readCharacterStats();
-		if (health < health - 20 && health > 0 && enemyHealth > 0) {
-			health += randomNumberFight() + 15;
-			renderHealths(1);
-		}
-
+		if (health < healthRegen && health>0 && enemyHealth>0) {
+			health += randomNumberFight() + 10;
+			renderHealths(0);
 		var counterMove = randomNumberFight();
-		if (counterMove < -1) {
+		if (counterMove < -2) {
 			enemyCombatFunction();
 		}
+	}
 	}
 
 	function enemyCombatFunction() {
@@ -149,15 +143,6 @@ function Stats(id) {
 			}
 		}
 		checkResult();
-	}
-
-	function atackAlgorithm(h, a, d) {
-		h -= Math.abs(Math.round((a - d) * 1.1) + randomNumberFight());
-		return h;
-	}
-
-	function randomNumberFight() {
-		return Math.floor(Math.random() * 9 - 4);
 	}
 
 	function checkResult() {
@@ -179,9 +164,23 @@ function Stats(id) {
 		health = Number(renderHealth[1].innerHTML.valueOf());
 		atack = Number(renderAtack[1].innerHTML.valueOf());
 		defense = Number(renderDefense[1].innerHTML.valueOf());
+		enemyHealth = Number(renderEnemyHealth.innerHTML.valueOf());
+		enemyAtack = Number(renderEnemyAtack.innerHTML.valueOf());
+		enemyDefense = Number(renderEnemyDefense.innerHTML.valueOf());
 	}
 
-	enemyHealth = Number(renderEnemyHealth.innerHTML.valueOf());
-	enemyAtack = Number(renderEnemyAtack.innerHTML.valueOf());
-	enemyDefense = Number(renderEnemyDefense.innerHTML.valueOf());
+	function atackAlgorithm(h, a, d) {
+		h -= Math.abs(Math.round((a - d) * 1.1) + randomNumberFight());
+		return h;
+	}
+
+	function randomNumberFight() {
+		return Math.floor(Math.random() * 9 - 4);
+	}
+
+	function getRandomEnemyStat(x) {
+		var min = Math.ceil(x - 9);
+		var max = Math.floor(x + 8);
+		return Math.floor(Math.random() * (max - min + 1)) + min;
+	}
 }
