@@ -26,7 +26,11 @@ function Stats(id) {
 			this.defense = defense;
 		}
 		rendStat() {
-			setStats(this.health, this.atack, this.defense);
+			health = this.health;
+			atack = this.atack;
+			defense = this.defense;
+			renderStats();
+			renderHealths(1);
 		}
 	}
 	// Stats Characters (health, atack, defense)
@@ -57,50 +61,44 @@ function Stats(id) {
 			setEnemyStats();
 			break;
 	}
-	function setStats(s1, s2, s3) {
-		health = s1;
-		atack = s2;
-		defense = s3;
-		renderStats(atack, defense);
-		renderHealths(health, id);
-	}
 
 	// Render Character and Enemy Character Stats
-	function renderStats(cAtack, cDefense) {
+	function renderStats() {
 		if (id <= 5) {
 			renderAtack.forEach((element) => {
-				element.innerHTML = ` ${cAtack}`;
+				element.innerHTML = ` ${atack}`;
 			});
 			renderDefense.forEach((element) => {
-				element.innerHTML = ` ${cDefense} `;
+				element.innerHTML = ` ${defense} `;
 			});
 		} else {
-			renderEnemyAtack.innerHTML = ` ${cAtack}`;
-			renderEnemyDefense.innerHTML = ` ${cDefense}`;
+			renderEnemyAtack.innerHTML = ` ${enemyAtack}`;
+			renderEnemyDefense.innerHTML = ` ${enemyDefense}`;
 		}
 	}
-	function renderHealths(cHealth, check) {
-		if (check <= 5) {
+	function renderHealths(check) {
+		if (check <= 1) {
 			renderHealth.forEach((element) => {
-				element.innerHTML = ` ${cHealth}`;
+				element.innerHTML = ` ${health}`;
 			});
 		} else {
-			renderEnemyHealth.innerHTML = ` ${cHealth}`;
+			renderEnemyHealth.innerHTML = ` ${enemyHealth}`;
 		}
 	}
 
-	function getRandomEnemyStat(charStat) {
-		min = Math.ceil(charStat - 9);
-		max = Math.floor(charStat + 8);
+	function getRandomEnemyStat(x) {
+		var min = Math.ceil(x - 9);
+		var max = Math.floor(x + 8);
 		return Math.floor(Math.random() * (max - min + 1)) + min;
 	}
 
 	function setEnemyStats() {
-		enemyHealth = getRandomEnemyStat(Number(renderHealth[1].innerHTML.valueOf()));
-		enemyAtack = getRandomEnemyStat(Number(renderAtack[1].innerHTML.valueOf()));
-		enemyDefense = getRandomEnemyStat(Number(renderDefense[1].innerHTML.valueOf()));
-		renderStats(enemyAtack, enemyDefense);
-		renderHealths(enemyHealth, 6);
+		readCharacterStats();
+		enemyHealth = getRandomEnemyStat(health);
+		enemyAtack = getRandomEnemyStat(atack);
+		enemyDefense = getRandomEnemyStat(defense);
+		renderStats();
+		renderHealths(2);
 	}
 
 	//Atack
@@ -109,15 +107,10 @@ function Stats(id) {
 	};
 
 	function characterAtack() {
-		var charHealth = Number(renderHealth[1].innerHTML.valueOf());
-		var charAtack = Number(renderAtack[1].innerHTML.valueOf());
-
-		var eCharHp = Number(renderEnemyHealth.innerHTML.valueOf());
-		var eCharDefense = Number(renderEnemyDefense.innerHTML.valueOf());
-		if (charHealth > 0) {
-			eCharHp = atackAlgorithm(eCharHp, charAtack, eCharDefense) - 5;
-			renderHealths(eCharHp, 6);
-			//must chceck enemy hp
+		readCharacterStats();
+		if (health > 0) {
+			enemyHealth = atackAlgorithm(enemyHealth, atack, enemyDefense) - 5;
+			renderHealths(enemyHealth, 6);
 			enemyCombatFunction();
 		}
 		checkResult();
@@ -129,11 +122,10 @@ function Stats(id) {
 	};
 
 	function characterRegen() {
-		var charHealth = Number(renderHealth[1].innerHTML.valueOf());
-		let eCharHp = Number(renderEnemyHealth.innerHTML.valueOf());
-		if (charHealth < health - 20 && eCharHp > 0) {
-			charHealth += randomNumberFight() + 15;
-			renderHealths(charHealth, 1);
+		readCharacterStats();
+		if (health < health - 20 && health > 0 && enemyHealth > 0) {
+			health += randomNumberFight() + 15;
+			renderHealths(1);
 		}
 
 		var counterMove = randomNumberFight();
@@ -143,21 +135,17 @@ function Stats(id) {
 	}
 
 	function enemyCombatFunction() {
+		readCharacterStats();
 		var enemyAction = randomNumberFight();
 
-		var charHealth = Number(renderHealth[1].innerHTML.valueOf());
-		var charDefense = Number(renderDefense[1].innerHTML.valueOf());
-
-		var eCharAtack = Number(renderEnemyAtack.innerHTML.valueOf());
-		var eCharHp = Number(renderEnemyHealth.innerHTML.valueOf());
-		if (charHealth > 0) {
+		if (enemyHealth > 0) {
 			if (enemyAction >= -3) {
-				charHealth = atackAlgorithm(charHealth, eCharAtack, charDefense) - 7;
+				health = atackAlgorithm(health, atack, defense) - 7;
 				//must chceck char hp
-				renderHealths(charHealth, 1);
+				renderHealths(1);
 			} else {
-				eCharHp += randomNumberFight() - 5;
-				renderHealths(eCharHp, 6);
+				enemyHealth += randomNumberFight() - 5;
+				renderHealths(2);
 			}
 		}
 		checkResult();
@@ -173,19 +161,27 @@ function Stats(id) {
 	}
 
 	function checkResult() {
-		var charHealth = Number(renderHealth[1].innerHTML.valueOf());
-		var eCharHp = Number(renderEnemyHealth.innerHTML.valueOf());
+		readCharacterStats();
 
 		const win = document.querySelector("#enemy-stats");
 		const lose = document.querySelector("#front-stats");
-		if(eCharHp <= 0 && charHealth <= 0){
+		if (enemyHealth <= 0 && health <= 0) {
 			win.innerHTML = `<h1 class="m-auto">Draft~!</h1>`;
-			lose.innerHTML = `<h1 class="m-auto">Draft~!</h1>`
-		}else if (eCharHp <= 0) {
+			lose.innerHTML = `<h1 class="m-auto">Draft~!</h1>`;
+		} else if (enemyHealth <= 0) {
 			win.innerHTML = `<h1 class="m-auto">You Win~!</h1>`;
-		}else if (charHealth <= 0) {
-			console.log("działa?");
+		} else if (health <= 0) {
 			lose.innerHTML = `<h1 class="m-auto">You Lose~!</h1>`;
 		}
 	}
+
+	function readCharacterStats() {
+		health = Number(renderHealth[1].innerHTML.valueOf());
+		atack = Number(renderAtack[1].innerHTML.valueOf());
+		defense = Number(renderDefense[1].innerHTML.valueOf());
+	}
+
+	enemyHealth = Number(renderEnemyHealth.innerHTML.valueOf());
+	enemyAtack = Number(renderEnemyAtack.innerHTML.valueOf());
+	enemyDefense = Number(renderEnemyDefense.innerHTML.valueOf());
 }
