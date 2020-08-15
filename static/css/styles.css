@@ -6,7 +6,8 @@ body {
   width: 300px;
   height: 400px;
 }
-.flip-card-container-fight{
+
+.flip-card-container-fight {
   width: 330px;
   height: 520px;
 }
@@ -18,8 +19,6 @@ body {
   transition: transform 1s;
   transform-style: preserve-3d;
 }
-
-
 
 .flip-card-container:hover .flip-card {
   transform: rotateY(180deg);
@@ -46,7 +45,8 @@ body {
   color: #fff;
   border-radius: 25px 25px 0px 0px;
 }
-.e-stat{
+
+.e-stat {
   background-color: #333;
 }
 
@@ -78,24 +78,26 @@ body {
   font-weight: bold;
   margin-top: 1.25rem;
 }
+
 #game {
   margin-top: 100px;
 }
 
-#front-stats{
+#front-stats {
   display: flex;
 }
 
-.fa-heart{
+.fa-heart {
   color: red;
 }
-.stat-icon{
+
+.stat-icon {
   width: 32px !important;
   height: 32px !important;
   margin-bottom: 5px !important;
 }
 
-.stats{
+.stats {
   width: 120px;
   background-color: #333;
   margin: auto;
@@ -107,8 +109,7 @@ body {
   .flip-card-container {
     margin: auto;
   }
-
-  #next-opponent{
+  #next-opponent {
     margin-top: 25px;
   }
 }

@@ -26,51 +26,51 @@
   <div id="game" class="d-lg-flex d-sm-block text-center align-items-top justify-content-center">
     <!-- Character Card -->
     <div class="">
-    <div class="flip-card-container text-center align-items-center">
-      <div class="flip-card">
-        <!-- Front Card -->
-        <div class="flip-card-front d-block text-center align-items-center">
-          <!-- Image and Name -->
-          <div id="character-front-card"></div>
-          <!-- Front Stats -->
-          <div class="fight-display h2 mt-3 e-stat d-none" id="front-stats">
-            <div class="mt-1 stats">
-              <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span class="char-h"></span>
+      <div class="flip-card-container text-center align-items-center">
+        <div class="flip-card">
+          <!-- Front Card -->
+          <div class="flip-card-front d-block text-center align-items-center">
+            <!-- Image and Name -->
+            <div id="character-front-card"></div>
+            <!-- Front Stats -->
+            <div class="fight-display h2 mt-3 e-stat d-none" id="front-stats">
+              <div class="mt-1 stats">
+                <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span class="char-h"></span>
+              </div>
+              <div class="mt-1 stats">
+                <img src="static/imgs/sword.svg" class="stat-icon"><span class="char-a"></span>
+              </div>
+              <div class="mt-1 stats">
+                <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
+              </div>
             </div>
-            <div class="mt-1 stats">
-              <img src="static/imgs/sword.svg" class="stat-icon"><span class="char-a"></span>
-            </div>
-            <div class="mt-1 stats">
-              <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
-            </div>
+            <div id="lose"></div>
           </div>
-          <div id="lose"></div>
-        </div>
 
-        <!-- Back Card -->
-        <div class="flip-card-back d-block">
-          <!-- Description -->
-          <div id="character-back-card" class="mt-4"></div>
-          <!-- Stats -->
-          <div id="char-stats" class="h2 mt-3 not-fight-display">
-            <div class="mt-1 stats">
-              <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span class="char-h"></span>
+          <!-- Back Card -->
+          <div class="flip-card-back d-block">
+            <!-- Description -->
+            <div id="character-back-card" class="mt-4"></div>
+            <!-- Stats -->
+            <div id="char-stats" class="h2 mt-3 not-fight-display">
+              <div class="mt-1 stats">
+                <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span class="char-h"></span>
+              </div>
+              <div class="mt-1 stats">
+                <img src="static/imgs/sword.svg" class="stat-icon"><span class="char-a"></span>
+              </div>
+              <div class="mt-1 stats">
+                <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
+              </div>
             </div>
-            <div class="mt-1 stats">
-              <img src="static/imgs/sword.svg" class="stat-icon"><span class="char-a"></span>
-            </div>
-            <div class="mt-1 stats">
-              <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
-            </div>
+            <!-- Start button -->
+            <div><button class="not-fight-display btn btn-success btn-lg mt-1" id="load-game">Play</button></div>
           </div>
-          <!-- Start button -->
-          <div><button class="not-fight-display btn btn-success btn-lg mt-1" id="load-game">Play</button></div>
         </div>
       </div>
-  </div>
-  <!-- Actions Buttons -->
-  <div id="atack-btn" class="fight-display btn btn-danger btn-lg my-3 d-none text-center">Atack</div>
-  <div id="regen-btn" class="fight-display btn btn-success btn-lg my-3 d-none text-center">Regeneration</div>
+      <!-- Actions Buttons -->
+      <div id="atack-btn" class="fight-display btn btn-danger btn-lg my-3 d-none text-center">Atack</div>
+      <div id="regen-btn" class="fight-display btn btn-success btn-lg my-3 d-none text-center">Regeneration</div>
 
 
     </div>
@@ -82,20 +82,20 @@
         <!-- Front Card -->
         <div class="flip-card-front d-block text-centeFr align-items-center">
           <!-- Image and Name -->
-            <div id="enemy-character-front-card"></div>
-            <div id="enemy-stats" class="h2 mt-3 d-flex d-none e-stat">
-              <div class="mt-1 stats">
-                <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span id="echar-h"></span>
-              </div>
-              <div class="mt-1 stats">
-                <img src="static/imgs/sword.svg" class="stat-icon"><span id="echar-a"></span>
-              </div>
-              <div class="mt-1 stats">
-                <img src="static/imgs/shield.svg" class="stat-icon"><span id="echar-d"></span>
-              </div>
+          <div id="enemy-character-front-card"></div>
+          <div id="enemy-stats" class="h2 mt-3 d-flex d-none e-stat">
+            <div class="mt-1 stats">
+              <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span id="echar-h"></span>
             </div>
-            <div id="win"></div>
-          
+            <div class="mt-1 stats">
+              <img src="static/imgs/sword.svg" class="stat-icon"><span id="echar-a"></span>
+            </div>
+            <div class="mt-1 stats">
+              <img src="static/imgs/shield.svg" class="stat-icon"><span id="echar-d"></span>
+            </div>
+          </div>
+          <div id="win"></div>
+
         </div>
         <!-- Back Card -->
         <div class="flip-card-back d-block">
@@ -107,7 +107,7 @@
     </div>
   </div>
 
-  
+
   <div id="next-opponent" class="text-center d-none"><button class="btn btn-warning btn-lg">New Enemy</button></div>
 
 
@@ -115,7 +115,8 @@
     <!--Przyciski-->
     <div class="not-fight-display scroll btn btn-success btn-lg m-3" id="load-previous"><i class="fa fa-arrow-left"
         aria-hidden="true"></i></div>
-    <div class="not-fight-display scroll btn btn-success btn-lg m-3" id="load-next"><i class="fa fa-arrow-right" aria-hidden="true"></i>
+    <div class="not-fight-display scroll btn btn-success btn-lg m-3" id="load-next"><i class="fa fa-arrow-right"
+        aria-hidden="true"></i>
     </div>
     <!--Przyciski-->
   </div>

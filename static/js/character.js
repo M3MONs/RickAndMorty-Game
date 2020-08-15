@@ -56,6 +56,5 @@ export default class Character {
 		this.$enemyCharacter.innerHTML = this.buildFrontCard();
 		this.$enemyCharacterNamePlaceHolder.innerHTML = this.buildBackCard();
 	}
-
 }
 //Main Characters stats

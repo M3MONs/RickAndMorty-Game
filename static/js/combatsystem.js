@@ -157,7 +157,6 @@ function Stats(id) {
 		button.classList.remove("d-none");
 	}
 
-
 	function checkResult() {
 		readCharacterStats();
 		readEnemyCharacterStats();

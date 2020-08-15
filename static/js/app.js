@@ -10,7 +10,6 @@ const loadPrevious = document.querySelector("#load-previous");
 const loadGame = document.querySelector("#load-game");
 const nextEnemyCharacter = document.querySelector("#next-opponent");
 
-
 //Next Character
 loadNext.addEventListener("click", async () => {
 	if (currentCaracter <= 5) {
@@ -43,24 +42,24 @@ loadGame.addEventListener("click", async () => {
 	var editCard = document.querySelectorAll(".flip-card-container");
 	editCard.forEach((card) => {
 		card.classList.add("flip-card-container-fight");
-  });
-  
-	const displayFight = document.querySelectorAll(".fight-display");
-  displayFight.forEach(element => {
-    element.classList.remove("d-none");
-  });
+	});
 
-  const undisplayFight = document.querySelectorAll(".not-fight-display");
-  undisplayFight.forEach(element => {
-    element.classList.add("d-none");
-  });
+	const displayFight = document.querySelectorAll(".fight-display");
+	displayFight.forEach((element) => {
+		element.classList.remove("d-none");
+	});
+
+	const undisplayFight = document.querySelectorAll(".not-fight-display");
+	undisplayFight.forEach((element) => {
+		element.classList.add("d-none");
+	});
 });
 
-nextEnemyCharacter.addEventListener("click", async () =>{
+nextEnemyCharacter.addEventListener("click", async () => {
 	Stats(currentCaracter);
-	createEnemy()
+	createEnemy();
 	nextEnemyCharacter.classList.add("d-none");
-})
+});
 
 //create first main Character card
 async function initApp(initCharacterId) {
