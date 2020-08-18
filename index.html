@@ -2,135 +2,74 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RickAndMorty</title>
-  <link rel="icon" href="static/imgs/site-icon.png">
-  <link rel="stylesheet" href="static/css/styles.css">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-    integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Document</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="background: #00a5be ">
 
-  <nav class="navbar text-center navbar-light justify-content-center">
-    <a href="index.html">
-      <img
-        src="https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUN-GDTJxnRVrjG8T0BwaXOPkn8xF8yiWXWwMEi5ckxxCKIkx2MSi47AleEzgOpFWcQzVWA1EUYv2Fj8T3qSIlKST9O4mhihBHsq.png?r=296"
-        width="250px" alt="">
-    </a>
-  </nav>
+      <nav class="navbar text-center navbar-light justify-content-center">
+            <a href="index.html">
+                  <img src="https://occ-0-1068-92.1.nflxso.net/dnm/api/v6/LmEnxtiAuzezXBjYXPuDgfZ4zZQ/AAAABUN-GDTJxnRVrjG8T0BwaXOPkn8xF8yiWXWwMEi5ckxxCKIkx2MSi47AleEzgOpFWcQzVWA1EUYv2Fj8T3qSIlKST9O4mhihBHsq.png?r=296"
+                        width="250px" alt="">
+            </a>
+      </nav>
 
-  <div id="game" class="d-lg-flex d-sm-block text-center align-items-top justify-content-center">
-    <!-- Character Card -->
-    <div class="">
-      <div class="flip-card-container text-center align-items-center">
-        <div class="flip-card">
-          <!-- Front Card -->
-          <div class="flip-card-front d-block text-center align-items-center">
-            <!-- Image and Name -->
-            <div id="character-front-card"></div>
-            <!-- Front Stats -->
-            <div class="fight-display h2 mt-3 e-stat d-none" id="front-stats">
-              <div class="mt-1 stats">
-                <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span class="char-h"></span>
-              </div>
-              <div class="mt-1 stats">
-                <img src="static/imgs/sword.svg" class="stat-icon"><span class="char-a"></span>
-              </div>
-              <div class="mt-1 stats">
-                <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
-              </div>
+      <div class="d-lg-flex d-sm-block align-items-start m-5">
+            <div class="m-auto">
+            <div class="card text-center bg-secondary m-auto" style="width: 300px;">
+                  <img src="" id="img-card" class="card-img-top" alt="">
+                  <div class="card-body" style="background-color: #333; color: white;">
+                        <h1 id="card-name" class="card-title"></h1>
+                        <div class="row">
+                              <div class="col"><img src="static/images/heart.svg" alt="" style="width: 50px;"><span id="hp"
+                                          class="h2"></span></div>
+                              <div class="col"><img src="static/images/sword.svg" alt="" style="width: 50px;"><span id="atack"
+                                          class="h2"></span></div>
+                              <div class="col"><img src="static/images/shield.svg" alt="" style="width: 50px;"><span
+                                          id="defence" class="h2"></span></div>
+                        </div>
+                        <div id="other-stat" class="row">
+                              <div class="col"><div><img src="static/images/gold.svg" alt="" style="width: 46px;"></div><div id="gold" class="h2"></div></div>
+                              <div class="col"><div class="h2">Level</div><div id="lvl" class="h2"></div></div>
+                        </div>
+                  </div>
             </div>
-            <div id="lose"></div>
-          </div>
-
-          <!-- Back Card -->
-          <div class="flip-card-back d-block">
-            <!-- Description -->
-            <div id="character-back-card" class="mt-4"></div>
-            <!-- Stats -->
-            <div id="char-stats" class="h2 mt-3 not-fight-display">
-              <div class="mt-1 stats">
-                <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span class="char-h"></span>
-              </div>
-              <div class="mt-1 stats">
-                <img src="static/imgs/sword.svg" class="stat-icon"><span class="char-a"></span>
-              </div>
-              <div class="mt-1 stats">
-                <img src="static/imgs/shield.svg" class="stat-icon"><span class="char-d"></span>
-              </div>
+            <div id="action-btns" class="text-center mt-2 d-none">
+                  <button id="atack-btn" class="btn btn-danger btn-lg">Atack</button>
+                  <button id="defence-btn" class="btn btn-success btn-lg">Defence</button>
+                  <button id="potion-btn" class="btn btn-warning btn-lg">Potion[50]</button>
             </div>
-            <!-- Start button -->
-            <div><button class="not-fight-display btn btn-success btn-lg mt-1" id="load-game">Play</button></div>
-          </div>
-        </div>
       </div>
-      <!-- Actions Buttons -->
-      <div id="atack-btn" class="fight-display btn btn-danger btn-lg my-3 d-none text-center">Atack</div>
-      <div id="regen-btn" class="fight-display btn btn-success btn-lg my-3 d-none text-center">Regeneration</div>
 
+            <div id="vs-container" class="text-center align-self-center display-1 mt-3 d-none">VS</div>
 
-    </div>
-    <div id="vs-container" class="text-center align-self-center"></div>
-
-    <!-- Enemy Character Card -->
-    <div id="enemy-character-card-container" class="fight-display flip-card-container text-center d-none">
-      <div class="flip-card">
-        <!-- Front Card -->
-        <div class="flip-card-front d-block text-centeFr align-items-center">
-          <!-- Image and Name -->
-          <div id="enemy-character-front-card"></div>
-          <div id="enemy-stats" class="h2 mt-3 d-flex d-none e-stat">
-            <div class="mt-1 stats">
-              <i class="fa fa-heart stat-icon" aria-hidden="true"></i><span id="echar-h"></span>
+                  <div id="enemy-card" class="card text-center bg-secondary d-none mt-5 mx-auto" style="width: 300px;">
+                        <img src="" id="enemy-img" class="card-img-top" alt="">
+                        <div class="card-body" style="background-color: #333; color: white;">
+                              <h1 id="enemy-name" class="card-title"></h1>
+                              <div class="row">
+                                    <div class="col"><img src="static/images/heart.svg" alt="" style="width: 50px;"><span
+                                                id="enemy-hp" class="h2"></span></div>
+                                    <div class="col"><img src="static/images/sword.svg" alt="" style="width: 50px;"><span
+                                                id="enemy-atack" class="h2"></span></div>
+                                    <div class="col"><img src="static/images/shield.svg" alt="" style="width: 50px;"><span
+                                                id="enemy-defence" class="h2"></span></div>
+                              </div>
+                        </div>
+                  </div>
             </div>
-            <div class="mt-1 stats">
-              <img src="static/imgs/sword.svg" class="stat-icon"><span id="echar-a"></span>
+
+            <div class="text-center m-3"><button id="play-btn" class="btn btn-success btn-lg">Play</button></div>
+            <div id="select-character" class="text-center m-2">
+                  <div id="previous-char" class="btn btn-success">Previous</div>
+                  <div id="next-char" class="btn btn-success">Next</div>
             </div>
-            <div class="mt-1 stats">
-              <img src="static/imgs/shield.svg" class="stat-icon"><span id="echar-d"></span>
-            </div>
-          </div>
-          <div id="win"></div>
 
-        </div>
-        <!-- Back Card -->
-        <div class="flip-card-back d-block">
-          <!-- Description -->
-          <div id="enemy-character-back-card" class="mt-4"></div>
-          <!-- Back Stats -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div id="next-opponent" class="text-center d-none"><button class="btn btn-warning btn-lg">New Enemy</button></div>
-
-
-  <div class="text-center mt-5">
-    <!--Przyciski-->
-    <div class="not-fight-display scroll btn btn-success btn-lg m-3" id="load-previous"><i class="fa fa-arrow-left"
-        aria-hidden="true"></i></div>
-    <div class="not-fight-display scroll btn btn-success btn-lg m-3" id="load-next"><i class="fa fa-arrow-right"
-        aria-hidden="true"></i>
-    </div>
-    <!--Przyciski-->
-  </div>
-
-  <script src="static/js/combatsystem.js"></script>
-  <script type="module" src="static/js/app.js"></script>
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-    integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
-    integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
-    crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-    integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-    crossorigin="anonymous"></script>
+            <script type="module" src="static/js/index.js"></script>
+</body>
 
 </html>
