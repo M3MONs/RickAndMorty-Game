@@ -52,7 +52,7 @@ let player = {
 	},
 	//player atack algorithm
 	atack() {
-		enemy.hp -= Math.floor((totalDamage - (enemy.defence*0.4)) * 0.9);
+		enemy.hp -= Math.floor((totalDamage - (enemy.defence*0.45)) * 0.85);
 		renderCharacter(enemy.id);
 		if(this.timePotion<3){
 			this.timePotion+=1;
@@ -119,9 +119,9 @@ let enemy = {
 	defence: 0,
 	potion: 2,
 	generateStats() {
-		this.hp = Math.floor(Math.random() * 15 - 7 + player.stats.hp + 20* player.lvl);
-		this.atack = Math.floor(Math.random() * 9 - 4 + player.stats.atack + 10 * player.lvl);
-		this.defence = Math.floor(Math.random() * 9 - 4 + player.stats.defence + 10 * player.lvl);
+		this.hp = Math.floor(Math.random() * 15 - 7 + player.stats.hp + 40* player.lvl);
+		this.atack = Math.floor(Math.random() * 9 - 4 + player.stats.atack + 20 * player.lvl);
+		this.defence = Math.floor(Math.random() * 9 - 4 + player.stats.defence + 15 * player.lvl);
 	},
 	next() {
 		this.id += 1;
@@ -130,7 +130,7 @@ let enemy = {
 		renderCharacter(this.id);
 	},
 	move() {
-		totalHealth -= Math.floor((totalDamage - (enemy.defence*0.45)) * 0.8);
+		totalHealth -= Math.floor((totalDamage - (enemy.defence*0.4))*0.7);
 		
 			renderCharacter(player.stats.id);
 	},
@@ -164,6 +164,9 @@ function checkWin(){
 		enemy.generateStats();
 		renderCharacter(player.stats.id);
 		renderCharacter(enemy.id);
+	}
+	if(totalHealth<=0){
+		document.querySelector("#game").innerHTML = `<h1 class="display-1 d-block m-auto text-center">You Lose</h1>`;
 	}
 }
 
